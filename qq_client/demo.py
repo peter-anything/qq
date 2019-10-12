@@ -11,6 +11,7 @@ from PyQt5.QtGui import QCursor, QColor, QPainter, QPen, QEnterEvent, QIcon
 from tools import Tool
 from widgets.qq_login_form import QQLoginForm
 from widgets.qq_title_bar import QQTitleBar
+from widgets.qq_main import QQMain
 
 # 枚举左上右下以及四个定点
 Left, Top, Right, Bottom, LeftTop, RightTop, LeftBottom, RightBottom = range(8)
@@ -23,7 +24,7 @@ class FramelessWindow(QWidget):
         self.Direction = None
         # 无边框
         self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)  # 隐藏边框
-        self.setAttribute(Qt.WA_TranslucentBackground)
+        # self.setAttribute(Qt.WA_TranslucentBackground)
         # 鼠标跟踪
         self.setMouseTracking(True)
         # 布局
@@ -31,9 +32,12 @@ class FramelessWindow(QWidget):
         # 预留边界用于实现无边框窗口调整大小
         layout.setContentsMargins(
             self.Margins, self.Margins, self.Margins, self.Margins)
+        self.loginForm = QQMain(self)
+        layout.addWidget(self.loginForm)
+        return
         # 标题栏
-        self.titleBar = QQTitleBar(self)
-        layout.addWidget(self.titleBar)
+        # self.titleBar = QQTitleBar(self)
+        # layout.addWidget(self.titleBar)
         # 信号槽
         self.titleBar.windowMinimumed.connect(self.showMinimized)
         self.titleBar.windowMaximumed.connect(self.showMaximized)
@@ -43,8 +47,6 @@ class FramelessWindow(QWidget):
         self.windowTitleChanged.connect(self.titleBar.setTitle)
         self.windowIconChanged.connect(self.titleBar.setIcon)
 
-        self.loginForm = QQLoginForm(self)
-        layout.addWidget(self.loginForm)
 
     # 重写三个方法使我们的Example窗口支持拖动,上面参数window就是拖动对象
     def mousePressEvent(self, event):
