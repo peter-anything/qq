@@ -2,6 +2,7 @@ from PyQt5.QtCore import Qt, QSize
 from PyQt5.QtWidgets import QWidget, QFormLayout, QPushButton, QHBoxLayout, QLabel, QVBoxLayout, QLineEdit
 
 from widgets.qq_input import QQInput
+from PyQt5.QtCore import pyqtSlot
 
 class QQLoginForm(QWidget):
     def __init__(self, *args, **kwargs):
@@ -22,6 +23,7 @@ class QQLoginForm(QWidget):
         login_button = QPushButton()
         login_button.setMaximumWidth(240)
         login_button.setText('登陆')
+        login_button.clicked.connect(self.on_click)
 
         # 向布局中添加这几个控件
         form_layout.addRow('', name_input1)
@@ -44,3 +46,7 @@ class QQLoginForm(QWidget):
         main_layout.addLayout(hbox2)
 
         self.setLayout(main_layout)
+
+    @pyqtSlot()
+    def login_click(self):
+        print("PyQt5 button click")

@@ -32,12 +32,11 @@ class FramelessWindow(QWidget):
         # 预留边界用于实现无边框窗口调整大小
         layout.setContentsMargins(
             self.Margins, self.Margins, self.Margins, self.Margins)
-        self.loginForm = QQMain(self)
+        self.loginForm = QQLoginForm(self)
         layout.addWidget(self.loginForm)
-        return
         # 标题栏
-        # self.titleBar = QQTitleBar(self)
-        # layout.addWidget(self.titleBar)
+        self.titleBar = QQTitleBar(self)
+        layout.addWidget(self.titleBar)
         # 信号槽
         self.titleBar.windowMinimumed.connect(self.showMinimized)
         self.titleBar.windowMaximumed.connect(self.showMaximized)
