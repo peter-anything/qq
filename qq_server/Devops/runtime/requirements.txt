@@ -1,0 +1,5 @@
+mysql-connector-python
+ujson
+django[argon2]
+PyJWT
+cryptography

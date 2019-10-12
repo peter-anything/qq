@@ -1,0 +1,89 @@
+QPushButton {
+    line-height: 34px;
+    height: 34px;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 5px;
+    background-color: #17A1FF;
+}
+
+QQInput {
+    border-bottom: 10px dotted pink;
+    line-height: 34px;
+    height: 34px;
+    text-decoration: none;
+    font-size: 16px;
+    width: 240px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+QHBoxLayout, QVBoxLayout {
+    margin: 0;
+    height: 126px;
+}
+
+QLabel {
+    font-size: 12px;
+    color: grey;
+}
+
+#login-header {
+    vertical-align: middle;
+    line-height: 126px;
+    font-size: 28px;
+    height: 126px;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+}
+
+QQTitleBar {
+    width: 100%;
+    background: url(resources/images/login-header.png);
+    margin: 0;
+}
+
+#buttonMinimum, #buttonMaximum, #buttonClose {
+    border: none;
+    background: none;
+    color: white;
+}
+
+#buttonMinimum:hover, #buttonMaximum:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#buttonClose:hover {
+    background-color: red;
+}
+
+#buttonMinimum:pressed, #buttonMaximum:pressed {
+    background-color: Firebrick;
+}
+
+#buttonClose:pressed {
+    color: white;
+    background-color: Firebrick;
+}
+
+#qq_icon {
+    background: none;
+    border-image: url(resources/images/tencent_qq.png);
+}
+
+#main_layout {
+    border-radius: 5px;
+}
+
+QQTitleBar {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+QQLoginForm {
+    background-color: #EFEFEF;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}

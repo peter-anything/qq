@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: qq-mysql
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - /data/mysql/:/var/lib/mysql
+    container_name: qq_db
+
+  server:
+    image: qq-runtime
+    build:
+      context: ./runtime
+      dockerfile: Dockerfile
+    volumes:
+      - /mnt/share/qq/qq_server/:/codes
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    command:
+      - sh
+      - -c
+      - |
+        cd /codes
+        python server_nothing.py
+    restart: always
+    container_name: qq_server

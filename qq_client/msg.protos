@@ -1,0 +1,28 @@
+登陆
+{
+    'type': 'USER_LOGIN',
+    'parms': {
+        'username': 'peter',
+        'password': '1234565'
+    }
+}
+
+获取所有好友
+{
+    'type': 'GET_ALL_MY_FRIENDS' 
+}
+
+获取所有好友状态
+{
+    'type': 'GET_ALL_MY_FRIENDS_STATUS' 
+}
+
+获取所有好友信息
+{
+    'type': 'GET_ALL_MY_FRIENDS_MSG' 
+}
+
+给好友发送信息
+{
+    'type': 'SEND_MSG_TO_FRIEND' 
+}

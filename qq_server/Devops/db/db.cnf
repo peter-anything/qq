@@ -1,0 +1,11 @@
+[mysqld]
+#数据库默认字符集,主流字符集支持一些特殊表情符号（特殊表情符占用4个字节）
+character-set-server = utf8mb4
+
+[mysql]
+# 设置mysql客户端默认编码
+default-character-set=utf8mb4
+[client]
+#设置客户端编码
+default-character-set=utf8mb4
+
