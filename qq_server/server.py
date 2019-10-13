@@ -1,6 +1,4 @@
 import socket
-import time
-import json
 
 import sys,os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))#存放c.py所在的绝对路径
@@ -16,4 +14,5 @@ if __name__ == "__main__":
 
     while True:
         conn, addr = server.accept()
+        print('client accept...')
         ServerThread(conn, client_socket_mapping).start()

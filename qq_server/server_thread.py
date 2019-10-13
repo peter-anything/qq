@@ -1,4 +1,4 @@
-import json
+import ujson as json
 import threading
 
 # 建立一个服务端
@@ -22,7 +22,14 @@ class ServerThread(threading.Thread):
         try:
             user = db_tool.get_object("select * from User where username='%s'" % params['username'], User)
         except Exception as e:
-            conn_continue = False
+            # 登录失败，发送消息后关闭连接
+            resp_data = {
+                'status': 1,
+                'msg': 'username or password error'
+            }
+            print('login error')
+            conn.send(json.dumps(resp_data).encode('utf-8'))
+            return False
 
         if check_password(params['password'], user.password):
             self.client_socket_mapping[str(user.id)] = conn
