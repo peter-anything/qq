@@ -2,9 +2,6 @@ import socket  # 导入 socket 模块
 import ujson as json
 import time
 
-server_host = '192.168.1.138' #
-server_port = 9001  # 设置端口号
-
 USER_LOGIN_REQUEST = {
     'type': 'USER_LOGIN',
     'parms': {
@@ -27,9 +24,6 @@ SEND_MSG_TO_FRIEND_REQUEST = {
         'user_id': 2
     }
 }
-
-client_socket = socket.socket()  # 创建 socket 对象
-client_socket.connect((server_host, server_port))
 
 def send_msg(client_socket, msg):
     client_socket.send(json.dumps(msg).encode('utf-8'))

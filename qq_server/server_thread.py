@@ -36,7 +36,8 @@ class ServerThread(threading.Thread):
             resp_data = {
                 'status': 0,
                 'data': {
-                    'token': QQToken.encode(user.id)
+                    'token': QQToken.encode(user.id),
+                    'id': str(user.id)
                 },
                 'msg': 'success'
             }

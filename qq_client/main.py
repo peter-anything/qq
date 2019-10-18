@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-
 import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QLineEdit,
                              QHBoxLayout, QVBoxLayout, QColorDialog, QInputDialog,
@@ -10,13 +9,18 @@ from PyQt5.QtGui import QCursor, QColor, QPainter, QPen, QEnterEvent, QIcon
 
 from tools import Tool
 from widgets.qq_login_form import QQLoginForm
-from widgets.qq_title_bar import QQTitleBar
+from widgets.qq_login_title_bar import QQTitleBar
+
+
 from widgets.qq_main import QQMain
 
 # 枚举左上右下以及四个定点
 Left, Top, Right, Bottom, LeftTop, RightTop, LeftBottom, RightBottom = range(8)
+
+
 class FramelessWindow(QWidget):
     Margins = 0
+
     def __init__(self, *args, **kwargs):
         super(FramelessWindow, self).__init__(*args, **kwargs)
         self.setGeometry(300, 300, 428, 326)
@@ -28,15 +32,14 @@ class FramelessWindow(QWidget):
         # 鼠标跟踪
         self.setMouseTracking(True)
         # 布局
-        layout = QVBoxLayout(self, spacing=0)
+        self.mainLayout = QVBoxLayout(self, spacing=0)
         # 预留边界用于实现无边框窗口调整大小
-        layout.setContentsMargins(
+        self.mainLayout.setContentsMargins(
             self.Margins, self.Margins, self.Margins, self.Margins)
-        self.loginForm = QQLoginForm(self)
-        layout.addWidget(self.loginForm)
+
         # 标题栏
         self.titleBar = QQTitleBar(self)
-        layout.addWidget(self.titleBar)
+        self.mainLayout.addWidget(self.titleBar)
         # 信号槽
         self.titleBar.windowMinimumed.connect(self.showMinimized)
         self.titleBar.windowMaximumed.connect(self.showMaximized)
@@ -45,6 +48,24 @@ class FramelessWindow(QWidget):
         self.titleBar.windowMoved.connect(self.move)
         self.windowTitleChanged.connect(self.titleBar.setTitle)
         self.windowIconChanged.connect(self.titleBar.setIcon)
+
+        self.loginForm = QQLoginForm(self)
+        self.loginForm.loginSuccess.connect(self.setupMain)
+        self.mainLayout.addWidget(self.loginForm)
+
+        self.setLayout(self.mainLayout)
+
+    def setupMain(self, user_id):
+        self.clearLayout()
+        # 标题栏
+        self.qqMain = QQMain()
+        self.qqMain.init_ui(user_id)
+        self.mainLayout.addWidget(self.qqMain)
+
+    def clearLayout(self):
+        for i in reversed(range(self.mainLayout.count())):
+            self.mainLayout.itemAt(i).widget().deleteLater()
+        self.setGeometry(300, 300, 285, 400)
 
 
     # 重写三个方法使我们的Example窗口支持拖动,上面参数window就是拖动对象
@@ -257,6 +278,7 @@ class FramelessWindow(QWidget):
             else:
                 return
         self.setGeometry(x, y, w, h)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

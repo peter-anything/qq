@@ -14,6 +14,7 @@ class QQTitleBar(QWidget):
     windowClosed = pyqtSignal()
     # 窗口移动
     windowMoved = pyqtSignal(QPoint)
+
     def __init__(self, *args, **kwargs):
         super(QQTitleBar, self).__init__(*args, **kwargs)
         main_layout = QVBoxLayout()

@@ -21,7 +21,7 @@ class DBTool(object):
             connection = DBTool.__connection_pool.pop()
         else:
             connection = mysql.connector.connect(user='qq', password='abc123_W#',
-                                                 database='qq', host='192.168.1.138')
+                                                 database='qq', host='192.168.1.143')
 
         return connection
 
