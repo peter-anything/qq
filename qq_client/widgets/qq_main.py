@@ -45,7 +45,7 @@ class QQMain(QWidget):
 
         self.main_layout.addLayout(content_layout)
 
-        ClientThread(ClientService()._socket).start()
+        ClientThread(ClientService()._socket, self).start()
 
     def set_userid(self, user_id):
         self.user_id = user_id
